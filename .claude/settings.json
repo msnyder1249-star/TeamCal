@@ -3,7 +3,12 @@
     "allow": [
       "Bash(npm init *)",
       "Bash(npx ts-node *)",
-      "Bash(node -e \"const d=require\\('fs'\\).readFileSync\\('/dev/stdin','utf8'\\);const j=JSON.parse\\(d\\);console.log\\('types:',j.types,'main:',j.main,'exports:',JSON.stringify\\(j.exports?.['.']\\).slice\\(0,200\\)\\)\")"
+      "Bash(node -e \"const d=require\\('fs'\\).readFileSync\\('/dev/stdin','utf8'\\);const j=JSON.parse\\(d\\);console.log\\('types:',j.types,'main:',j.main,'exports:',JSON.stringify\\(j.exports?.['.']\\).slice\\(0,200\\)\\)\")",
+      "Bash(git stash *)",
+      "Bash(git checkout *)",
+      "Bash(git rebase *)",
+      "Bash(git merge *)",
+      "Bash(git restore *)"
     ]
   }
 }
