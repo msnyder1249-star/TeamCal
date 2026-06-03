@@ -1,0 +1,49 @@
+[
+  {
+    "id": "panthers",
+    "name": "Carolina Panthers",
+    "provider": "espn",
+    "sport": "football",
+    "league": "nfl",
+    "teamId": "29"
+  },
+  {
+    "id": "unc-football",
+    "name": "UNC Tar Heels Football",
+    "provider": "espn",
+    "sport": "football",
+    "league": "college-football",
+    "teamId": "153",
+    "season": 2026
+  },
+  {
+    "id": "texas-football",
+    "name": "Texas Longhorns Football",
+    "provider": "espn",
+    "sport": "football",
+    "league": "college-football",
+    "teamId": "251",
+    "season": 2026
+  },
+  {
+    "id": "unc-mbb",
+    "name": "UNC Tar Heels Men's Basketball",
+    "provider": "espn",
+    "sport": "basketball",
+    "league": "mens-college-basketball",
+    "teamId": "153",
+    "season": 2026
+  },
+  {
+    "id": "worldcup2026",
+    "name": "FIFA World Cup 2026 — All Matches",
+    "provider": "openfootball",
+    "filter": []
+  },
+  {
+    "id": "worldcup2026-usa",
+    "name": "FIFA World Cup 2026 — USA, Mexico",
+    "provider": "openfootball",
+    "filter": ["United States", "USA", "Mexico"]
+  }
+]
