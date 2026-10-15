@@ -19,6 +19,7 @@ export interface TeamConfig {
   teamId?: string;      // ESPN numeric team ID
   season?: number;      // ESPN: explicit season year (e.g. 2026); omit for auto
   filter?: string[];    // openfootball: team codes to include, empty = all
+  emoji?: string;       // title prefix; defaults from sport/provider
 }
 
 export interface Provider {

@@ -17,6 +17,20 @@ const providers: Record<string, Provider> = {
   openfootball: new OpenFootballProvider(),
 };
 
+const SPORT_EMOJI: Record<string, string> = {
+  football: "🏈",
+  basketball: "🏀",
+  baseball: "⚾",
+  hockey: "🏒",
+  soccer: "⚽",
+};
+
+function teamEmoji(team: TeamConfig): string {
+  if (team.emoji !== undefined) return team.emoji;
+  if (team.provider === "openfootball") return SPORT_EMOJI.soccer;
+  return SPORT_EMOJI[team.sport ?? ""] ?? "";
+}
+
 function buildUID(match: Match, teamId: string): string {
   // Stable UID: same game + same feed = same UID, so calendar apps update in place
   return `${match.id}-${teamId}@teamcal`;
@@ -25,15 +39,15 @@ function buildUID(match: Match, teamId: string): string {
 function matchToEvent(
   cal: ReturnType<typeof ical>,
   match: Match,
-  teamId: string
+  team: TeamConfig
 ): void {
   const end = new Date(match.start.getTime() + match.durationMinutes * 60_000);
 
   cal.createEvent({
-    id: buildUID(match, teamId),
+    id: buildUID(match, team.id),
     start: match.start,
     end,
-    summary: match.title,
+    summary: [teamEmoji(team), match.title].filter(Boolean).join(" "),
     location: [...new Set([match.venue, match.location].filter(Boolean))].join(" — "),
     status: match.status === "cancelled" ? ICalEventStatus.CANCELLED : undefined,
     busystatus:
@@ -81,8 +95,8 @@ export async function generate(): Promise<void> {
     });
 
     for (const match of matches) {
-      matchToEvent(teamCal, match, team.id);
-      matchToEvent(combinedCal, match, team.id);
+      matchToEvent(teamCal, match, team);
+      matchToEvent(combinedCal, match, team);
     }
 
     const outPath = path.join(DIST_DIR, `${team.id}.ics`);
