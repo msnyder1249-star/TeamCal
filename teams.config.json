@@ -14,7 +14,7 @@
     "sport": "football",
     "league": "college-football",
     "teamId": "153",
-    "season": 2026
+    "season": "upcoming"
   },
   {
     "id": "texas-football",
@@ -23,7 +23,7 @@
     "sport": "football",
     "league": "college-football",
     "teamId": "251",
-    "season": 2026
+    "season": "upcoming"
   },
   {
     "id": "unc-mbb",
@@ -32,7 +32,7 @@
     "sport": "basketball",
     "league": "mens-college-basketball",
     "teamId": "153",
-    "season": 2026
+    "season": "upcoming"
   },
   {
     "id": "worldcup2026",

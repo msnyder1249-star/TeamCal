@@ -22,6 +22,17 @@ function parseStatus(
   return "scheduled";
 }
 
+// ESPN labels seasons that cross New Year (basketball, hockey) by the year they end,
+// and fall sports by the year they start. Pick the season in progress or next up.
+export function upcomingSeason(sport: string, now = new Date()): number {
+  const year = now.getUTCFullYear();
+  const month = now.getUTCMonth(); // 0 = Jan
+  if (sport === "basketball" || sport === "hockey") {
+    return month >= 6 ? year + 1 : year; // July onward → next winter's season
+  }
+  return month === 0 ? year - 1 : year; // January bowl/playoff games belong to last season
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function parseEvent(event: any, sport: string): Match | null {
   try {
@@ -74,10 +85,11 @@ export class ESPNProvider implements Provider {
 
     if (team.season != null) {
       // Explicit season requested — fetch it and never fall back
-      const url = `${baseUrl}?season=${team.season}`;
+      const season = team.season === "upcoming" ? upcomingSeason(sport) : team.season;
+      const url = `${baseUrl}?season=${season}`;
       data = (await fetchCached(url)) as typeof data;
       if ((data.events ?? []).length === 0) {
-        console.log(`    (no games found for ${team.name} season ${team.season})`);
+        console.log(`    (no games found for ${team.name} season ${season})`);
       }
     } else {
       // Auto mode (NFL): fetch current season; if preseason/empty fall back one year

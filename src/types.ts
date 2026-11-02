@@ -17,7 +17,7 @@ export interface TeamConfig {
   sport?: string;       // ESPN: "football", "basketball", etc.
   league?: string;      // ESPN: "nfl", "college-football", etc.
   teamId?: string;      // ESPN numeric team ID
-  season?: number;      // ESPN: explicit season year (e.g. 2026); omit for auto
+  season?: number | "upcoming"; // ESPN: explicit year (e.g. 2026), "upcoming" to roll over yearly; omit for auto
   filter?: string[];    // openfootball: team codes to include, empty = all
   emoji?: string;       // title prefix; defaults from sport/provider
 }
